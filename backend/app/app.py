@@ -20,7 +20,7 @@ import json
 from pptx import Presentation
 from pptx.util import Inches
 
-# Export ke liye naya schema add karein
+# DB for Export Requests
 class ExportRequest(BaseModel):
     title: str
     content: str

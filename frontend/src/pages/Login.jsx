@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Youtube, User, Mail, Lock, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isRegister, setIsRegister] = useState(false);
+  const location = useLocation();
+
+  // BUG FIXED: Safely check location state without crashing
+  const initialMode = (location.state && location.state.isSignUp) ? true : false;
+  const [isRegister, setIsRegister] = useState(initialMode);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // BUG FIXED: Watch for changes if user clicks header links while already on this page
+  useEffect(() => {
+    if (location.state && location.state.isSignUp !== undefined) {
+      setIsRegister(location.state.isSignUp);
+      setError(""); // Clear error when switching modes
+    }
+  }, [location.state]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); setError("");
-    const endpoint = isRegister ? "/api/register" : "/api/login";
+    const endpoint = isRegister ? `${API_BASE_URL}/register` : `${API_BASE_URL}/login`;
     try {
-      const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, { email, password, username });
+      const res = await axios.post(endpoint, { email, password, username });
       if (!isRegister) {
         localStorage.setItem("user_id", res.data.user_id);
         localStorage.setItem("username", res.data.username);
@@ -33,7 +47,6 @@ const Login = () => {
     <div className="login-container">
       {/* LEFT SIDE (Branding) */}
       <div className="left-panel">
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)', opacity: 0.9, zIndex: 1 }}></div>
         <div style={{ zIndex: 10, textAlign: 'center' }}>
           <div style={{ 
             width: '80px', height: '80px', background: 'rgba(255,255,255,0.2)', 
@@ -54,10 +67,10 @@ const Login = () => {
         <div className="form-card fade-in">
           
           <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-            <h2 style={{ fontSize: '26px', fontWeight: 'bold', color: '#1e293b', marginBottom: '8px' }}>
+            <h2 style={{ fontSize: '26px', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '8px' }}>
               {isRegister ? "Create Account" : "Welcome Back! 👋"}
             </h2>
-            <p style={{ color: '#64748b', fontSize: '14px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
               {isRegister ? "Join VidioMind today" : "Enter your details to access your dashboard."}
             </p>
           </div>
@@ -72,7 +85,7 @@ const Login = () => {
             
             {isRegister && (
               <div className="input-group">
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#334155', marginBottom: '8px' }}>Full Name</label>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--text-primary)', marginBottom: '8px' }}>Full Name</label>
                 <div className="input-wrapper">
                   <User size={20} className="input-icon" />
                   <input 
@@ -81,14 +94,14 @@ const Login = () => {
                     placeholder="e.g. Aamir Khan" 
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
-                    required 
+                    required={isRegister} // Sirf register ke waqt required ho 
                   />
                 </div>
               </div>
             )}
 
             <div className="input-group">
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#334155', marginBottom: '8px' }}>Email Address</label>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--text-primary)', marginBottom: '8px' }}>Email Address</label>
               <div className="input-wrapper">
                 <Mail size={20} className="input-icon" />
                 <input 
@@ -103,7 +116,7 @@ const Login = () => {
             </div>
 
             <div className="input-group" style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#334155', marginBottom: '8px' }}>Password</label>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: 'var(--text-primary)', marginBottom: '8px' }}>Password</label>
               <div className="input-wrapper">
                 <Lock size={20} className="input-icon" />
                 <input 
@@ -124,11 +137,11 @@ const Login = () => {
 
           </form>
 
-          <div style={{ marginTop: '24px', textAlign: 'center', fontSize: '14px', color: '#64748b' }}>
+          <div style={{ marginTop: '24px', textAlign: 'center', fontSize: '14px', color: 'var(--text-muted)' }}>
             {isRegister ? "Already have an account?" : "Don't have an account?"} 
             <span 
               onClick={() => setIsRegister(!isRegister)} 
-              style={{ color: '#2563eb', fontWeight: '600', cursor: 'pointer', marginLeft: '5px' }}
+              style={{ color: 'var(--primary)', fontWeight: '600', cursor: 'pointer', marginLeft: '5px' }}
             >
               {isRegister ? "Sign In" : "Sign Up"}
             </span>

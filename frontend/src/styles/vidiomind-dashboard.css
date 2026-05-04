@@ -1,0 +1,43 @@
+:root{
+  --vm-bg: #0d0d1a;
+  --vm-surface: rgba(255,255,255,0.04);
+  --vm-border: rgba(255,255,255,0.08);
+  --vm-purple: #7c3aed;
+  --vm-purple-600: #6d28d9;
+  --vm-text: #ffffff;
+  --vm-muted: rgba(255,255,255,0.45);
+  --vm-dim: rgba(255,255,255,0.25);
+  --vm-green: #34d399;
+}
+
+.vm-page{background:var(--vm-bg);min-height:100vh;color:var(--vm-text);font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+.vm-container{max-width:1200px;margin:0 auto;padding:28px}
+.vm-card{background:var(--vm-surface);border:1px solid var(--vm-border);border-radius:14px;padding:18px}
+.vm-input{width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);color:var(--vm-text);outline:none}
+.vm-btn{background:linear-gradient(135deg,var(--vm-purple),#ec4899);color:white;padding:10px 16px;border-radius:10px;border:none;cursor:pointer}
+.vm-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.vm-pipeline{margin-top:14px}
+.vm-pipe-step{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.vm-pipe-dot{width:10px;height:10px;border-radius:50%}
+.vm-results{margin-top:18px}
+.vm-tabs{display:flex;gap:8px;background:rgba(255,255,255,0.02);padding:6px;border-radius:8px}
+.vm-tab{flex:1;padding:8px;border-radius:6px;text-align:center;cursor:pointer}
+.vm-tab.active{background:linear-gradient(135deg,var(--vm-purple-600),var(--vm-purple));color:#fff}
+.vm-history-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid var(--vm-border)}
+.vm-player{background:#000;border-radius:8px;padding:8px}
+.vm-keypoints li{margin-bottom:6px}
+
+@media (max-width: 900px){
+  .vm-grid{grid-template-columns:1fr}
+}
+
+/* Analyze input styles */
+.analyze-card { padding: 18px; border-radius: 12px; }
+.analyze-input-wrap { position: relative; display: flex; gap: 8px; align-items: center; }
+.analyze-input { flex: 1; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); color: var(--vm-text); }
+.short-select { width: 96px; padding: 10px 8px; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); color: var(--vm-text); }
+.analyze-btn { display:inline-flex; align-items:center; gap:8px; background: linear-gradient(90deg,#7c3aed,#ec4899); color:white; border:none; padding:10px 16px; border-radius:10px; cursor:pointer }
+.analyze-btn:disabled { opacity: 0.6; cursor: not-allowed }
+
+/* small tweaks for the header area */
+.analyze-card label { display:block; margin-bottom:6px }

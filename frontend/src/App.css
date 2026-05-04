@@ -1,74 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
+/* App.css */
+/* =========================================
+   1. THEME VARIABLES (Dark First Default)
+========================================= */
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --bg-light: #f8fafc;
-  --sidebar-bg: #ffffff;
-  --text-dark: #1e293b;
-  --text-gray: #64748b;
-  --border: #e2e8f0;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
   --sidebar-width: 260px;
+
+  /* DARK THEME (Default) */
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  
+  /* Login Specific - Dark Mode */
+  --left-panel-bg: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); 
+  --input-bg: #0f172a; 
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+/* LIGHT THEME */
+body.light-theme {
+  --bg-main: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #e2e8f0; 
+  --text-primary: #0f172a;  
+  --text-muted: #475569;    
+  --border-color: #cbd5e1;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  
+  /* Login Specific - Light Mode */
+  --left-panel-bg: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%); 
+  --input-bg: #ffffff; 
 }
 
+/* =========================================
+   2. GLOBAL
+========================================= */
 body {
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  overflow-x: hidden;
-  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- Layout (Dashboard) --- */
-.app-layout {
-  display: flex;
-  min-height: 100vh;
-  position: relative;
-}
-
-.sidebar {
-  width: var(--sidebar-width);
-  background: var(--sidebar-bg);
-  border-right: 1px solid var(--border);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  transition: transform 0.3s ease-in-out;
-}
-
-.main-content {
-  margin-left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
-  padding: 40px;
-  min-height: 100vh;
-  transition: all 0.3s ease-in-out;
-}
-
-/* --- Login Page (Split Design) --- */
+/* =========================================
+   3. LOGIN PAGE STYLES
+========================================= */
 .login-container {
   display: flex;
   min-height: 100vh;
   width: 100vw;
   font-family: 'Inter', sans-serif;
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--bg-main);
 }
 
 .left-panel {
   flex: 1;
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  background: var(--left-panel-bg); 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,6 +67,7 @@ body {
   color: white;
   padding: 40px;
   position: relative;
+  transition: background 0.3s ease;
 }
 
 .right-panel {
@@ -83,30 +75,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc;
+  background-color: var(--bg-main);
   padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .form-card {
   width: 100%;
   max-width: 420px;
-  background: white;
+  background-color: var(--bg-card);
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Login Inputs (Custom Class) */
+.form-card h2 { color: var(--text-primary); }
+.form-card p { color: var(--text-muted); }
+.form-card label { color: var(--text-primary) !important; }
+
+/* Login Inputs */
 .custom-input {
   width: 100%;
-  padding: 12px 12px 12px 40px; /* Icon padding */
-  border: 1px solid #e2e8f0;
+  padding: 12px 12px 12px 40px; 
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   outline: none;
   font-size: 15px;
-  transition: all 0.2s;
-  background-color: #fff;
+  transition: all 0.2s, background-color 0.3s ease;
+  background-color: var(--input-bg); 
+  color: var(--text-primary);
 }
 
 .custom-input:focus {
@@ -114,14 +114,23 @@ body {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.input-group { margin-bottom: 16px; }
+.custom-input:-webkit-autofill,
+.custom-input:-webkit-autofill:hover, 
+.custom-input:-webkit-autofill:focus, 
+.custom-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--input-bg) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-group { margin-bottom: 16px; text-align: left; }
 .input-wrapper { position: relative; }
 .input-icon {
   position: absolute;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .submit-btn {
@@ -141,68 +150,121 @@ body {
   transition: background 0.2s;
 }
 .submit-btn:hover { background: var(--primary-hover); }
-.submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+.submit-btn:disabled { background: var(--text-muted); cursor: not-allowed; }
 
-/* --- DASHBOARD STYLES (Fixed Missing Class) --- */
-/* Ye class purani file se delete ho gayi thi, ab wapis add kar di hai */
+/* =========================================
+   4. LAYOUT (Dashboard Structure)
+========================================= */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  padding: 40px;
+  min-height: 100vh;
+  transition: all 0.3s ease-in-out;
+}
+
+/* =========================================
+   5. DASHBOARD COMPONENTS
+========================================= */
+.dashboard-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  color: var(--text-primary);
+}
+
 .input-field {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   font-size: 16px;
   outline: none;
-  transition: all 0.2s;
-  background-color: #f8fafc;
-  color: var(--text-dark);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: all 0.2s, background-color 0.3s ease;
 }
-
 .input-field:focus {
   border-color: var(--primary);
-  background-color: #fff;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 14px;
-  font-weight: 600;
-  font-size: 16px;
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--text-muted); 
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  gap: 10px;
+}
+.nav-item span { color: inherit; }
+.nav-item:hover { background-color: var(--bg-card-hover); color: var(--primary); }
+
+.theme-toggle-btn {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 10px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  transition: all 0.3s ease;
 }
-
-.btn-primary:hover { background-color: var(--primary-hover); }
-.btn-primary:disabled { background-color: #94a3b8; cursor: not-allowed; }
-
-/* --- Components --- */
-.card {
-  background: white;
-  border-radius: 16px; /* Thora roundness barha di */
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  margin-bottom: 20px;
-}
+.theme-toggle-btn:hover { background: rgba(59, 130, 246, 0.1); color: var(--primary); }
 
 .menu-btn {
   display: none;
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-primary);
   position: fixed;
   top: 15px; left: 15px; z-index: 101;
-  background: white;
-  border: 1px solid var(--border);
-  padding: 8px;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  color: var(--text-dark);
 }
 
 .overlay {
@@ -214,35 +276,171 @@ body {
 }
 .overlay.visible { display: block; }
 
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  color: var(--text-gray);
-  text-decoration: none;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
-.nav-item:hover, .nav-item.active {
-  background-color: #eff6ff;
-  color: var(--primary);
-}
-
-/* Animations */
 .fade-in { animation: fadeIn 0.5s ease-in-out; width: 100%; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .spin { animation: spin 1s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* --- Responsive Styles (Mobile) --- */
-@media (max-width: 768px) {
-  .sidebar { transform: translateX(-100%); box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
+/* =========================================
+   6. RESPONSIVE QUERIES
+========================================= */
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); box-shadow: 2px 0 10px rgba(0,0,0,0.2); }
   .sidebar.open { transform: translateX(0); }
-  .main-content { margin-left: 0; width: 100%; padding: 20px; padding-top: 70px; }
+  .main-content { margin-left: 0; width: 100%; padding: 20px; padding-top: 80px; }
   .menu-btn { display: flex; }
+}
+
+@media (max-width: 768px) {
   .left-panel { display: none; }
-  .right-panel { background-color: white; padding: 20px; }
-  .form-card { box-shadow: none; border: none; padding: 10px; }
+  .right-panel { background-color: var(--bg-main); padding: 20px; }
+  .form-card { box-shadow: none; border: none; padding: 20px; }
+}
+
+/* =========================================
+   7. ISOLATED VITE STYLES (Optional)
+   NOTE: Purana #root hata diya gaya hai taake VideoRAG kharab na ho.
+   Agar Landing page center karna ho, toh uske main div ko .standard-page class de dena.
+========================================= */
+.standard-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo { animation: logo-spin infinite 20s linear; }
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* =========================================
+   8. VIDEORAG SPECIFIC STYLES
+========================================= */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0f172a;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Ensure glass-panel has proper styling */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.8) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* VidioMind sidebar / header refined styles to match new design */
+.sidebar {
+  background: linear-gradient(180deg, #071026 0%, #0b1220 100%);
+  padding: 28px 18px;
+}
+
+.sidebar .sidebar-brand { margin-bottom: 36px; }
+.sidebar .brand-icon { box-shadow: none; }
+.sidebar .brand-title { margin: 0; }
+
+.sidebar .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  transition: all 0.18s ease;
+  font-weight: 600;
+}
+.sidebar .nav-item .nav-icon { width: 28px; height: 28px; display:flex;align-items:center;justify-content:center;color:var(--text-muted);} 
+.sidebar .nav-item:hover { background: rgba(255,255,255,0.02); color: var(--text-primary); }
+.sidebar .nav-item.active {
+  background: linear-gradient(90deg,#7c3aed,#ec4899);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(124,58,237,0.12);
+  transform: translateX(2px);
+}
+.sidebar .nav-item.active .nav-icon { color: #fff; }
+
+.sidebar .logout-btn { margin-top: auto; color: #ef4444; display:flex; align-items:center; gap:10px; }
+
+.dashboard-header { padding: 12px 0; }
+.dashboard-header .menu-btn { display: none; }
+.dashboard-header > div { display:flex; align-items:center; gap:12px; }
+.dashboard-header .user-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(180deg,#3b82f6,#7c3aed); display:flex;align-items:center;justify-content:center;color:white;font-weight:700 }
+
+.dashboard-header .signout-link { color: var(--text-muted); background: transparent; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.dashboard-header .signout-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.02); }
+
+@media (max-width: 1024px) {
+  .dashboard-header .menu-btn { display:flex; }
+}
+
+/* Prose styling for markdown in chat */
+.prose {
+  color: inherit;
+}
+
+.prose-invert a {
+  color: #6366f1;
+  text-decoration: underline;
+}
+
+/* Message bubble animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure proper flex layout on all containers */
+[class*="flex"] {
+  box-sizing: border-box;
+}
+
+/* Fix for grid items */
+[class*="grid"] {
+  box-sizing: border-box;
 }
