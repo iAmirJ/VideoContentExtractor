@@ -4,10 +4,7 @@
 
 ### 🎥 Project Demo
 
-<video width="100%" controls>
-  <source src="https://github.com/iAmirJ/VideoContentExtractor/raw/main/Demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<img src="Demo.gif" width="100%" alt="Project Demo">
 
 ## 📝 Project Description
 Built an AI platform to automate a media client's content workflow using Python, FastAPI, and LLMs.
