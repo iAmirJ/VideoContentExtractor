@@ -3,9 +3,11 @@
 ## AI-Powered Video Summarization & Content Generation Platform
 
 ### 🎥 Project Demo
-<!-- Yahan apni video ka link ya tag add karein -->
-[![Watch the video](https://img.shields.io/badge/Watch-Demo_Video-blue?style=for-the-badge&logo=youtube)](YOUR_VIDEO_LINK_HERE)
-*(Replace `YOUR_VIDEO_LINK_HERE` with your actual video URL, or use a standard HTML `<video>` tag if uploading directly to GitHub)*
+
+<video width="100%" controls>
+  <source src="https://github.com/iAmirJ/VideoContentExtractor/raw/main/Demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## 📝 Project Description
 Built an AI platform to automate a media client's content workflow using Python, FastAPI, and LLMs.
