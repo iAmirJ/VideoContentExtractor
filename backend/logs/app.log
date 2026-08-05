@@ -1,0 +1,97 @@
+2026-08-04 19:04:28,736 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-04 19:04:29,123 - vidiomind - INFO - Database initialized.
+2026-08-04 19:13:01,771 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-04 19:13:01,841 - vidiomind - INFO - Database initialized.
+2026-08-04 19:17:14,285 - vidiomind - ERROR - Unexpected Error on http://127.0.0.1:8000/api/v1/login: 'User' object has no attribute 'id'
+Traceback (most recent call last):
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\fastapi\routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\fastapi\routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\fastapi\routing.py", line 330, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\starlette\concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\BS\Projects\Video_Summarizer\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "D:\BS\Projects\Video_Summarizer\backend\app\api\endpoints\auth.py", line 41, in login
+    "user_id": user.id,
+               ^^^^^^^
+AttributeError: 'User' object has no attribute 'id'
+2026-08-04 19:18:46,763 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-04 19:18:46,859 - vidiomind - INFO - Database initialized.
+2026-08-04 19:25:22,789 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-04 19:25:22,870 - vidiomind - INFO - Database initialized.
+2026-08-04 19:35:03,916 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-04 19:35:04,048 - vidiomind - INFO - Database initialized.
+2026-08-05 03:25:26,854 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:25:27,180 - vidiomind - INFO - Database initialized.
+2026-08-05 03:32:43,520 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:32:43,610 - vidiomind - INFO - Database initialized.
+2026-08-05 03:34:55,736 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:34:55,856 - vidiomind - INFO - Database initialized.
+2026-08-05 03:41:30,191 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:41:30,279 - vidiomind - INFO - Database initialized.
+2026-08-05 03:41:48,828 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:41:48,905 - vidiomind - INFO - Database initialized.
+2026-08-05 03:43:33,990 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:43:34,065 - vidiomind - INFO - Database initialized.
+2026-08-05 03:46:00,602 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:46:00,696 - vidiomind - INFO - Database initialized.
+2026-08-05 03:54:26,696 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:54:26,777 - vidiomind - INFO - Database initialized.
+2026-08-05 03:57:48,048 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 03:57:48,143 - vidiomind - INFO - Database initialized.
+2026-08-05 04:04:48,157 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 04:04:48,241 - vidiomind - INFO - Database initialized.
+2026-08-05 04:08:49,162 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 04:08:49,237 - vidiomind - INFO - Database initialized.
+2026-08-05 04:11:57,589 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 04:11:57,665 - vidiomind - INFO - Database initialized.
+2026-08-05 04:13:12,831 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 04:13:12,900 - vidiomind - INFO - Database initialized.
+2026-08-05 04:21:11,496 - vidiomind - INFO - GenerativeAI configured successfully.
+2026-08-05 04:21:11,590 - vidiomind - INFO - Database initialized.

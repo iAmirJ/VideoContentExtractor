@@ -21,7 +21,9 @@ os.makedirs(TEMP_UPLOAD_DIR, exist_ok=True)
 # The frontend will poll this to get updates
 processing_status: Dict[str, dict] = {}
 
-async def process_video_background(file_path: str, video_id: str, user_id: str, original_filename: str):
+import asyncio
+
+def process_video_background(file_path: str, video_id: str, user_id: str, original_filename: str):
     """
     Background task that handles the heavy processing.
     It updates the 'processing_status' dictionary at each step.
@@ -65,7 +67,7 @@ async def process_video_background(file_path: str, video_id: str, user_id: str, 
             "progress": 80
         }
         
-        await vector_db.upsert_transcription(segments, video_id, user_id)
+        asyncio.run(vector_db.upsert_transcription(segments, video_id, user_id))
         
         # Step 4: Completion
         # Update status to 100% when everything is done

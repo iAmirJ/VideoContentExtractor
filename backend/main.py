@@ -13,18 +13,30 @@ from app.api.endpoints import profile
 # --- 2. Import RAG Agent Modules ---
 from app.api.endpoints import ingest, chat
 from app.core.config import settings
+from app.core.exceptions import AppError, app_error_handler, global_exception_handler
+from app.core.logger import logger
+import logging
+
+class EndpointFilter(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        # Hide polling requests from access logs to prevent terminal pollution
+        return "/status/" not in record.getMessage() and "/shorten-status/" not in record.getMessage()
+
+logging.getLogger("uvicorn.access").addFilter(EndpointFilter())
 
 # --- CONFIGURATION & DATABASE ---
 load_dotenv()
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 
 if not GEMINI_KEY:
-    print("Error: GEMINI_API_KEY not found in .env file")
+    logger.error("GEMINI_API_KEY not found in .env file")
 else:
     genai.configure(api_key=GEMINI_KEY)
+    logger.info("GenerativeAI configured successfully.")
 
 # VidioMind Database Setup
 models.Base.metadata.create_all(bind=database.engine)
+logger.info("Database initialized.")
 
 # --- APP INITIALIZATION ---
 app = FastAPI(
@@ -32,6 +44,10 @@ app = FastAPI(
     description="Unified backend for Video Summarizer and Video Q&A with Timestamp Retrieval.",
     version="1.0.0"
 )
+
+# --- Exception Handlers ---
+app.add_exception_handler(AppError, app_error_handler)
+app.add_exception_handler(Exception, global_exception_handler)
 
 # --- CORS Configuration ---
 # Dono ke CORS rules mila kar ek comprehensive list bana di hai

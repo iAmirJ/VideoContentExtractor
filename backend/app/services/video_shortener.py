@@ -18,6 +18,11 @@ class VideoShortenerService:
         self.transcription_service = TranscriptionService()
         self.temp_dir = Path("temp_shorts")
         self.temp_dir.mkdir(exist_ok=True)
+        
+        # FIX: Inject Node.js path so yt-dlp can solve JS n-sig challenges
+        self.node_path = r"C:\Program Files\nodejs"
+        if self.node_path not in os.environ.get("PATH", ""):
+            os.environ["PATH"] = os.environ.get("PATH", "") + ";" + self.node_path
     
     def download_youtube_video(self, url: str, output_path: str) -> bool:
         """
@@ -25,10 +30,12 @@ class VideoShortenerService:
         Returns: True if successful, False otherwise
         """
         try:
-            print(f"📥 Downloading video from: {url}")
+            import sys
             cmd = [
-                "yt-dlp",
+                sys.executable, "-m", "yt_dlp",
                 "-f", "best[ext=mp4]",
+                "--cookies", "cookies.txt",
+                "--js-runtimes", "node",
                 "-o", output_path,
                 url
             ]
@@ -274,12 +281,15 @@ class VideoShortenerService:
                 return False
             
             print(f"🎬 Concatenating {len(segments)} segments...")
+            import uuid
+            unique_id = uuid.uuid4().hex[:8]
+            
             # Create re-encoded segment files to guarantee consistent codecs (v: h264, a: aac)
             seg_files = []
             try:
                 for idx, (start, end) in enumerate(segments):
                     dur = max(0.5, end - start)
-                    seg_path = str(self.temp_dir / f"seg_{idx}.mp4")
+                    seg_path = str(self.temp_dir / f"seg_{unique_id}_{idx}.mp4")
                     # Extract the segment with re-encoding to ensure audio present and browser-friendly codecs
                     cmd = [
                         "ffmpeg",

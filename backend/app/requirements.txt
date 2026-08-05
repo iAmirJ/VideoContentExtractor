@@ -1,23 +1,50 @@
-fastapi 
-uvicorn 
-python-multipart 
-openai 
-langchain 
-langchain-openai 
-langchain-pinecone 
-langchain-community 
-pinecone-client 
-python-dotenv 
-moviepy 
-pydub 
-psycopg-pool 
-psycopg[binary] 
-langgraph 
-langchain-classic 
-langgraph-checkpoint-postgres 
-openai-whisper
-whisper 
-torch 
+# --- Web Framework & Server ---
+fastapi
+uvicorn
 python-multipart
+pydantic-settings
+python-dotenv
+requests
+
+# --- Database Drivers & ORM ---
+sqlalchemy
+psycopg2-binary
+psycopg
+psycopg-binary
+pymysql
+sqlalchemy-utils
+
+# --- Security & Authentication ---
+bcrypt==4.0.1
+passlib[bcrypt]
+python-jose[cryptography]
+
+# --- Google AI & APIs ---
+google-generativeai
+google-genai
+google-api-python-client
+google-auth
+
+# --- LangChain, LangGraph, Vector DBs & Parsing (RAG) ---
+langchain
+langchain-google-genai
+langchain-community
+langgraph
+langgraph-checkpoint-postgres
+faiss-cpu
+pinecone-client
+langchain-pinecone
+pypdf
+PyMuPDF
+
+# --- Media Processing & Downloading ---
+openai-whisper
 yt-dlp
-ffmpeg-python
+moviepy
+pillow
+pandas
+
+# --- File Generation & Export ---
+fpdf2
+python-docx
+python-pptx

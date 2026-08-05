@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.post("/export/word")
 def export_word_ai(req: ExportRequest):
-    model = genai.GenerativeModel("gemini-3-flash-preview")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     
     prompt = f"""
     You are an expert document formatter. Analyze the text below and organize it into a professional, well-structured document.
@@ -86,7 +86,7 @@ def export_word_ai(req: ExportRequest):
 
 @router.post("/export/pdf")
 def export_pdf_ai(req: ExportRequest):
-    model = genai.GenerativeModel("gemini-3-flash-preview")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     
     prompt = f"""
     You are an expert document formatter. Analyze the text below and organize it into a professional, well-structured document.
@@ -177,7 +177,7 @@ def export_pdf_ai(req: ExportRequest):
 
 @router.post("/export/ppt")
 def export_ppt_ai(req: ExportRequest):
-    model = genai.GenerativeModel("gemini-3-flash-preview")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     
     prompt = f"""
     You are an expert presentation maker. Analyze the text below and convert ALL of it into a presentation.

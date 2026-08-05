@@ -9,6 +9,11 @@ from app import models
 TEMP_FOLDER = "temp_audio"
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
+# FIX: Inject Node.js path so yt-dlp can solve JS n-sig challenges for YouTube
+NODE_PATH = r"C:\Program Files\nodejs"
+if NODE_PATH not in os.environ.get("PATH", ""):
+    os.environ["PATH"] = os.environ.get("PATH", "") + ";" + NODE_PATH
+
 def update_status(pid, status, percent, db: Session):
     try:
         req = db.query(models.ProcessingRequest).filter_by(project_id=pid).first()
@@ -36,6 +41,8 @@ def process_video_with_gemini(pid: int, url: str, db: Session):
             'nocheckcertificate': True,
             'socket_timeout': 60,
             'retries': 10,
+            'cookiefile': 'cookies.txt',
+            'js_runtimes': {'node': {}},
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -67,7 +74,7 @@ def process_video_with_gemini(pid: int, url: str, db: Session):
         # Step 3: Generate
         update_status(pid, "Generating Clean Content...", 75, db)
         
-        model = genai.GenerativeModel("gemini-3-flash-preview")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         
         prompt = """
         Analyze this audio. Return a strictly valid JSON object.

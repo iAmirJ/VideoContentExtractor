@@ -18,7 +18,7 @@ class ShortenVideoRequest(BaseModel):
     target_duration: int = 60  # default 1 minute
 
 # --- HELPER: Create shortening tracker in DB if needed ---
-async def process_video_shortening_background(url: str, user_id: int, target_duration: int, request_id: str):
+def process_video_shortening_background(url: str, user_id: int, target_duration: int, request_id: str):
     """Background task to download and shorten video."""
     try:
         shortener = VideoShortenerService()
