@@ -40,6 +40,9 @@ PyMuPDF
 # --- Media Processing & Downloading ---
 openai-whisper
 yt-dlp
+yt-dlp-ejs
+nodejs-wheel-binaries
+pytubefix
 moviepy
 pillow
 pandas
