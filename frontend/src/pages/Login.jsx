@@ -21,6 +21,7 @@ const Login = () => {
   // BUG FIXED: Watch for changes if user clicks header links while already on this page
   useEffect(() => {
     if (location.state && location.state.isSignUp !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsRegister(location.state.isSignUp);
       setError(""); // Clear error when switching modes
     }

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Clock, Sparkles, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { API_ENDPOINTS, BACKEND_URL } from '../config';
 

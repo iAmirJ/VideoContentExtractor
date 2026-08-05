@@ -78,7 +78,7 @@ export default function Layout({ children }) {
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           {!isMobile && <div style={{ fontSize: 13, color: C.muted }}>👋 {username}</div>}
           <div style={{ width: 32, height: 32, background: "linear-gradient(135deg,#7c3aed,#3b82f6)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 600 }}>{userAvatar}</div>
-          <button onClick={handleSignOut} style={{ border: "none", cursor: "pointer", fontSize: 12, color: C.muted, background: "rgba(255,255,255,0.05)", border: `1px solid ${C.border}`, borderRadius: 8, padding: "6px 14px", transition: "background 0.2s" }} onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"} onMouseOut={e => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}>
+          <button onClick={handleSignOut} style={{ cursor: "pointer", fontSize: 12, color: C.muted, background: "rgba(255,255,255,0.05)", border: `1px solid ${C.border}`, borderRadius: 8, padding: "6px 14px", transition: "background 0.2s" }} onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"} onMouseOut={e => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}>
             Sign out
           </button>
         </div>

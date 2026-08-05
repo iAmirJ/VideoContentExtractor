@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Film, Play, RefreshCw, Loader2, CloudUpload, FileVideo, Activity, Clock } from 'lucide-react';
 import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { API_ENDPOINTS } from '../config';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -13,6 +14,7 @@ const VideoSidebar = ({ onSelectVideo, currentVideo, userId }) => {
   const [progress, setProgress] = useState(0);
   const [statusMessage, setStatusMessage] = useState(''); 
   const [currentPhase, setCurrentPhase] = useState('idle'); 
+  // eslint-disable-next-line no-unused-vars
   const [elapsedTime, setElapsedTime] = useState(0); 
   
   const fileInputRef = useRef(null);
@@ -30,6 +32,7 @@ const VideoSidebar = ({ onSelectVideo, currentVideo, userId }) => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -59,7 +62,9 @@ const VideoSidebar = ({ onSelectVideo, currentVideo, userId }) => {
           setCurrentPhase('error');
           setStatusMessage(message);
         }
-      } catch (error) {}
+      } catch {
+         // Do nothing
+      }
     }, 1000);
   };
 
@@ -81,7 +86,7 @@ const VideoSidebar = ({ onSelectVideo, currentVideo, userId }) => {
       });
       setCurrentPhase('processing'); setStatusMessage('Initializing AI Models...');
       pollProcessingStatus(response.data.video_id);
-    } catch (error) {
+    } catch {
       setCurrentPhase('error'); setStatusMessage("Upload Failed.");
       setTimeout(resetUploadState, 4000);
     } finally {
@@ -97,6 +102,7 @@ const VideoSidebar = ({ onSelectVideo, currentVideo, userId }) => {
   useEffect(() => {
     fetchVideos();
     return () => { if (timerRef.current) clearInterval(timerRef.current); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

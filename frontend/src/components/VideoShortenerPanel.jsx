@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Play, Loader2, Download, Copy, CheckCircle, AlertCircle } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { API_ENDPOINTS, BACKEND_URL } from '../config';
 
@@ -14,6 +15,11 @@ const VideoShortenerPanel = ({ userId }) => {
 
   const handleShorten = async (e) => {
     e.preventDefault();
+    
+    // Cleanup any existing intervals to prevent orphaned API polling loops
+    if (statusCheckIntervalRef.current) {
+      clearInterval(statusCheckIntervalRef.current);
+    }
     
     if (!youtubeUrl.trim()) {
       setError('Please enter a YouTube URL');
@@ -90,6 +96,13 @@ const VideoShortenerPanel = ({ userId }) => {
     const base = (BACKEND_URL || '').replace(/\/$/, '');
     return `${base}${url}`;
   };
+
+  // Cleanup on unmount
+  React.useEffect(() => {
+    return () => {
+      if (statusCheckIntervalRef.current) clearInterval(statusCheckIntervalRef.current);
+    };
+  }, []);
 
   return (
     <div className="w-full h-full glass-panel rounded-3xl p-6 flex flex-col shadow-2xl border border-white/10 bg-gradient-to-br from-purple-500/5 to-pink-500/5">

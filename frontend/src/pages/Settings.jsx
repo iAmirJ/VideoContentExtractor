@@ -1,5 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
+
+// Reusable Switch Component
+const Switch = ({ isOn, handleToggle }) => (
+  <div 
+    onClick={handleToggle}
+    style={{
+      width: '44px', height: '22px', borderRadius: '12px',
+      background: isOn ? '#7c3aed' : '#3f3f46',
+      position: 'relative', cursor: 'pointer', transition: '0.3s'
+    }}
+  >
+    <div style={{
+      width: '18px', height: '18px', borderRadius: '50%',
+      background: '#fff', position: 'absolute', top: '2px',
+      left: isOn ? '24px' : '2px', transition: '0.3s'
+    }} />
+  </div>
+);
+
+// Reusable Choice Chip Component
+const Chip = ({ label, active, onClick }) => (
+  <button 
+    onClick={onClick}
+    style={{
+      padding: '8px 16px', borderRadius: '8px', border: '1px solid',
+      borderColor: active ? '#7c3aed' : 'rgba(255,255,255,0.1)',
+      background: active ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.05)',
+      color: active ? '#d8b4fe' : 'rgba(255,255,255,0.6)',
+      fontSize: '13px', cursor: 'pointer', transition: '0.2s', fontWeight: active ? '600' : '400'
+    }}
+  >
+    {label}
+  </button>
+);
 
 const Settings = () => {
   // LocalStorage se initial data uthane ke liye logic
@@ -38,40 +72,6 @@ const Settings = () => {
     localStorage.clear();
     window.location.href = '/login';
   };
-
-  // Reusable Switch Component
-  const Switch = ({ isOn, handleToggle }) => (
-    <div 
-      onClick={handleToggle}
-      style={{
-        width: '44px', height: '22px', borderRadius: '12px',
-        background: isOn ? '#7c3aed' : '#3f3f46',
-        position: 'relative', cursor: 'pointer', transition: '0.3s'
-      }}
-    >
-      <div style={{
-        width: '18px', height: '18px', borderRadius: '50%',
-        background: '#fff', position: 'absolute', top: '2px',
-        left: isOn ? '24px' : '2px', transition: '0.3s'
-      }} />
-    </div>
-  );
-
-  // Reusable Choice Chip Component
-  const Chip = ({ label, active, onClick }) => (
-    <button 
-      onClick={onClick}
-      style={{
-        padding: '8px 16px', borderRadius: '8px', border: '1px solid',
-        borderColor: active ? '#7c3aed' : 'rgba(255,255,255,0.1)',
-        background: active ? 'rgba(124,58,237,0.1)' : 'rgba(255,255,255,0.05)',
-        color: active ? '#d8b4fe' : 'rgba(255,255,255,0.6)',
-        fontSize: '13px', cursor: 'pointer', transition: '0.2s', fontWeight: active ? '600' : '400'
-      }}
-    >
-      {label}
-    </button>
-  );
 
   return (
     <Layout>

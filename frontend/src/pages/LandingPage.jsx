@@ -115,20 +115,21 @@ const TestimonialCard = ({ quote, name, role }) => (
 // ==========================================
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  // Check agar user logged in hai localStorage se
-  useEffect(() => {
+  
+  // Initialize state lazily instead of setting state synchronously in useEffect
+  const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
+        return JSON.parse(storedUser);
+      } catch {
         console.error("Failed to parse user data");
       }
     }
-  }, []);
+    return null;
+  });
+  
+  const navigate = useNavigate();
 
   // Logout Function
   const handleLogout = () => {
